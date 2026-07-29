@@ -1,0 +1,17 @@
+services:
+  spotify-downloader:
+    image: doctorpatita/spotify-downloader:latest
+    user: "1000:1000"
+
+    volumes:
+      - ./data:/app/data
+
+    environment:
+      - BASE_DIR=/app/data
+      - DEBUG=false
+      - PLAYLIST_URL=
+      - START_SHORT_RANDOM_WAIT=5
+      - END_SHORT_RANDOM_WAIT=20
+      - START_LONG_RANDOM_WAIT=60
+      - END_LONG_RANDOM_WAIT=300
+      - SONGS_FOR_LONG_WAIT=50

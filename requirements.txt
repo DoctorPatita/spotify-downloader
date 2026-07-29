@@ -1,0 +1,10 @@
+requests
+beautifulsoup4
+yt-dlp
+mutagen
+rapidfuzz
+pykakasi
+python-slugify
+ytmusicapi
+playwright
+python-dotenv

@@ -3,7 +3,7 @@ Automatically downloads Spotify playlists by finding and fetching matching audio
 
 ### Why?
 
-I was using spotDL (spotify-downloader) to download my Spotify playlists. It's a great project, but I ran into a few issues, such as hitting rate limits, incorrect song matching, and a few other annoyances (which may or may not have been fixed by now).
+I was using [spotDL/spotify-downloader](https://github.com/spotDL/spotify-downloader) to download my Spotify playlists. It's a great project, but I ran into a few issues, such as hitting rate limits, incorrect song matching, and a few other annoyances (which may or may not have been fixed by now).
 
 Rather than waiting for someone else to fix those problems, I decided to build my own downloader, tailored to my own preferences and needs. spotDL is a much larger and more mature project than this one, but my project does exactly what I need it to do.
 

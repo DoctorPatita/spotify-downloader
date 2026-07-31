@@ -1,26 +1,36 @@
 # Spotify Downloader
 Automatically downloads Spotify playlists by finding and fetching matching audio from YouTube, with smart matching and full metadata tagging (title, artists, album, cover art, release date). Playlist data is scraped using [spotAPI](https://github.com/Aran404/SpotAPI).
 
-## Installation
+### Why?
 
-Build from source
+I was using spotDL (spotify-downloader) to download my Spotify playlists. It's a great project, but I ran into a few issues, such as hitting rate limits, incorrect song matching, and a few other annoyances (which may or may not have been fixed by now).
+
+Rather than waiting for someone else to fix those problems, I decided to build my own downloader, tailored to my own preferences and needs. spotDL is a much larger and more mature project than this one, but my project does exactly what I need it to do.
+
+## Installation (Build from source)
+
+Clone the repository:
 ```bash
 git clone https://github.com/DoctorPatita/spotify-downloader.git
 cd spotify-downloader
 ```
-I recommend using a venv.
+
+I recommend using a virtual environment. Create one with:
 ```bash
 python -m venv venv
 ```
-Windows:
+
+Activate it:
+- Windows:
 ```powershell
 venv\Scripts\Activate.ps1
 ```
-Linux/macOS:
+- Linux/macOS:
 ```bash
 source venv/bin/activate
 ```
-then
+
+Then install the dependencies:
 ```bash
 pip install -r requirements.txt
 ```

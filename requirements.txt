@@ -6,5 +6,8 @@ rapidfuzz
 pykakasi
 python-slugify
 ytmusicapi
-playwright
 python-dotenv
+spotapi
+pymongo
+redis
+websockets

@@ -98,7 +98,7 @@ def run_playlist_mode():
     """
 
     BASE_DIR = os.getenv("BASE_DIR", "./data")
-    PLAYLIST_URL = os.getenv("PLAYLIST_URL")
+    PLAYLIST_ID = os.getenv("PLAYLIST_ID")
 
     START_SHORT_RANDOM_WAIT = float(os.getenv("START_SHORT_RANDOM_WAIT", 5))
     END_SHORT_RANDOM_WAIT = float(os.getenv("END_SHORT_RANDOM_WAIT", 20))
@@ -115,11 +115,11 @@ def run_playlist_mode():
 
     logger = logging.getLogger(__name__)
 
-    logger.info(f"Downloading: {PLAYLIST_URL}")
+    logger.info(f"Downloading playlist: {PLAYLIST_ID}")
 
     # Scrape all track metadata from the playlist and load the list of
     # tracks already downloaded in previous runs, to avoid duplicate work.
-    playlist = obtain_spotify_metadata(PLAYLIST_URL)
+    playlist = obtain_spotify_metadata(PLAYLIST_ID)
     downloaded = get_urls_from_txt(DOWNLOADED_FILE)
 
     song_count = 0

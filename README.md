@@ -1,5 +1,5 @@
 # Spotify Downloader
-Automatically downloads Spotify playlists by finding and fetching matching audio from YouTube, with smart matching and full metadata tagging (title, artists, album, cover art, release date). Playlist data is scraped directly from the Spotify web player — no Spotify API or API key required.
+Automatically downloads Spotify playlists by finding and fetching matching audio from YouTube, with smart matching and full metadata tagging (title, artists, album, cover art, release date). Playlist data is scraped using [spotAPI](https://github.com/Aran404/SpotAPI).
 
 ## Installation
 
@@ -51,7 +51,7 @@ cp .env.example .env
 ```
 | Variable | Description | Default |
 |---|---|---|
-| `PLAYLIST_URL` | Spotify playlist URL to download | *(required)* |
+| `PLAYLIST_ID` | Spotify playlist ID to download | *(required)* |
 | `BASE_DIR` | Base directory for downloads, logs and cookies | `./data` |
 | `DEBUG` | Enables debug-level console logging (`true`/`false`) | `false` |
 | `START_SHORT_RANDOM_WAIT` / `END_SHORT_RANDOM_WAIT` | Range in seconds for the wait between tracks | `5` / `20` |
@@ -92,7 +92,7 @@ python main.py manual "<spotify_track_url>" "<youtube_video_url>"
 
 Visit the [Docker Hub Page](https://hub.docker.com/r/doctorpatita/spotify-downloader)
 
-A `Dockerfile` and `docker-compose.yml` are included, so you don't need to install FFmpeg, Deno, or Playwright browsers manually — they're already set up in the image.
+A `Dockerfile` and `docker-compose.yml` are included, so you don't need to install FFmpeg or Deno manually — they're already set up in the image.
 
 Default behavior (`docker compose up` runs the `playlist` mode):
 ```bash
@@ -108,7 +108,9 @@ docker compose run --rm -it spotify-downloader unmatched
 docker compose run --rm -it spotify-downloader manual "https://open.spotify.com/track/XXXX" "https://www.youtube.com/watch?v=YYYY"
 ```
 Configuration is passed the same way, via environment variables in `docker-compose.yml` or an `.env` file referenced by it.
+
 ## Credits
 This project is inspired by [spotDL/spotify-downloader](https://github.com/spotDL/spotify-downloader), under the MIT license.
+
 ## License
 This project is licensed under the [MIT License](LICENSE).

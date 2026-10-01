@@ -9,7 +9,7 @@ from slugify import slugify
 import logging
 
 from searcher import search_ytmusic, search_ytmusic_artist_catalog, search_youtube
-from utils import ratio, split_on_commas
+from utils import ratio, split_on_commas, check_japanese
 
 
 logger = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ HIGH_FORBIDDEN_WORDS = [
     "cover",
     "sing-along",
     "version",
-    "ver.",
+    "ver",
     "karaoke",
     "en-vivo",
     "acustico",
@@ -93,7 +93,7 @@ def calc_title_match(song_title, result_title):
         if word in result_title and word not in song_title:
             score -= 5
 
-    return score
+    return max(0, score)
 
 
 def calc_album_match(song_album, result_album):
@@ -224,10 +224,13 @@ def find_match(metadata):
     query = f"{metadata['title']} - {artists_str}"
 
     candidates = search_ytmusic(query)
+
+    if check_japanese(query):
+        candidates += search_ytmusic_artist_catalog(metadata['artists'][0])
+
     match = find_best(metadata, candidates)
 
-
-    if not match:
+    if not match and not check_japanese(query):
         logger.info("No match on direct search. Trying artist catalog.")
         candidates = search_ytmusic_artist_catalog(metadata['artists'][0])
         match = find_best(metadata, candidates)

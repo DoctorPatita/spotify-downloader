@@ -43,6 +43,18 @@ def convert_japanese(string):
     string = " ".join(romaji_parts)
     return string
 
+def check_japanese(string):
+    """
+    Checks if a string contains Japanese characters
+    
+    ### Arguments
+    - string: input string to check (str)
+
+    ### Returns
+    - True if the string contains Japanese characters (bool)
+    """
+    return JAP_REGEX.search(string)
+
 
 def ratio(string1, string2):
     """
@@ -58,11 +70,11 @@ def ratio(string1, string2):
 
     japanese = False
 
-    if JAP_REGEX.search(string1):
+    if check_japanese(string1):
         string1 = convert_japanese(string1)
         japanese = True
 
-    if JAP_REGEX.search(string2):
+    if check_japanese(string2):
         string2 = convert_japanese(string2)
         japanese = True
 

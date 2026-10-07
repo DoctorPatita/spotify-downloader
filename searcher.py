@@ -10,9 +10,27 @@ import logging
 
 from utils import ratio
 
-
 logger = logging.getLogger(__name__)
 
+_ytmusic = None
+_ytdlp= None
+
+def get_ytmusic():
+    global _ytmusic
+    if _ytmusic is None:
+        _ytmusic = YTMusic()
+    return _ytmusic
+
+
+def get_ytdlp():
+    global _ytdlp
+    if _ytdlp is None:
+        _ytdlp = yt_dlp.YoutubeDL({'quiet': True,
+            'no_warnings': True,
+            'extract_flat': 'in_playlist',
+            'skip_download': True,
+        })
+    return _ytdlp
 
 def search_youtube(query, limit=5):
     """
@@ -30,18 +48,12 @@ def search_youtube(query, limit=5):
       results have no reliable album data.
     """
 
-    ydl_opts = {
-        'quiet': True,
-        'no_warnings': True,
-        'extract_flat': 'in_playlist',
-        'skip_download': True,
-    }
 
     candidates = []
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(f"ytsearch{limit}:{query}", download=False)
-        entries = info.get('entries', []) if info else []
+    ydl = get_ytdlp()
+    info = ydl.extract_info(f"ytsearch{limit}:{query}", download=False)
+    entries = info.get('entries', []) if info else []
 
     for entry in entries:
         video_id = entry.get('id')
@@ -84,7 +96,7 @@ def search_ytmusic(query, limit=1):
 
     logger.info(f"Searching audio for '{query}'...")
     
-    ytmusic = YTMusic() 
+    ytmusic = get_ytmusic() 
     results = ytmusic.search(query, filter="songs", limit=limit)
 
     candidates = []
@@ -144,7 +156,7 @@ def search_ytmusic_artist_catalog(artist_name):
     """
 
     # Cuz ytmusic search sometimes sucks (maybe it's only with japanese)
-    ytmusic = YTMusic()
+    ytmusic = get_ytmusic()
 
     artist_results = ytmusic.search(artist_name, filter="artists", limit=1)
     if not artist_results:
